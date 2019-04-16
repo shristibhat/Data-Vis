@@ -1,0 +1,63 @@
+.pictogram svg{
+  overflow:none;
+  padding:10px;
+  float:left;
+  width:400px;
+  height:400px;
+}
+
+
+.iconPlain  {
+  fill:#a7a59b;   
+}
+
+.iconFemale  {
+  fill:#bb6d82;   
+}
+.iconMale  {
+  fill:#007bff;   
+}
+.iconGlobal  {
+  fill:#ff0000;   
+}
+
+rect    {
+  /* fill:#fff1e0;    */
+}
+
+.pictogram{
+}
+
+text{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.legend {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 60%;
+}
+text {
+  font: 10px sans-serif;
+}
+.axis text {
+  font: 10px sans-serif;
+}
+.axis path{
+  fill: none;
+  stroke: #000;
+}
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+
+.axis .domain {
+
+}
+.chest-pain{  
+  font-family: 'Open Sans', sans-serif;
+  height: 400px;
+}
