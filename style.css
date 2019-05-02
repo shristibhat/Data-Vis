@@ -12,14 +12,82 @@
 }
 
 .iconFemale  {
-  fill:#bb6d82;   
+  fill:#c51b8a;   
 }
 .iconMale  {
-  fill:#007bff;   
+  fill:#08519c;   
 }
 .iconGlobal  {
-  fill:#ff0000;   
+  fill:#FFA07A; 
 }
+
+.columnage {
+  float: left;
+  text-align: center;
+}
+
+.col1,.col3 {
+  width: 30%;
+}
+
+.col2 {
+  width: 40%;
+}
+
+.button1 {
+  background-color:#08519c; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 15px;
+  cursor: pointer;
+}
+
+
+
+.button2 {
+  background-color:#c51b8a; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 6px 15px;
+  cursor: pointer;
+}
+
+.button3 {
+  background-color:#FFA07A; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 15px;
+  cursor: pointer;
+}
+
+.button1:hover {
+  background-color: #3e7cb9;
+  color:white;
+}
+.button2:hover {
+  background-color:#f768a1;
+  color:white;
+}
+.button3:hover {
+  background-color: rgb(233, 175, 152);
+  color:white;
+}
+
 
 rect    {
   /* fill:#fff1e0;    */

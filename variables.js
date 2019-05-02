@@ -1,4 +1,5 @@
-let patients = [ 0, 0, 0 ],
+let csv_file = 'https://raw.githubusercontent.com/shristibhat/Data-Vis/master/heart.csv',
+	patients = [ 0, 0, 0 ],
 	minAge = 0,
 	maxAge = 0,
 	population = [ 0, 0 ],
@@ -8,67 +9,67 @@ let patients = [ 0, 0, 0 ],
 		[
 			{
 				label: 'Type0',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type1',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type2',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type3',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		],
 		[
 			{
 				label: 'Type0',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type1',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type2',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type3',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		],
 		[
 			{
 				label: 'Type0',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type1',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type2',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Type3',
-				Patients: 0,
-				Healthy: 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		]
 	],
@@ -76,82 +77,82 @@ let patients = [ 0, 0, 0 ],
 		[
 			{
 				label: 'Normal',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Elevated',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'HBP Stage1',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'HBP Stage2',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
-				label: 'Hypertension crisis',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				label: 'HP crisis',
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		],
 		[
 			{
 				label: 'Normal',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Elevated',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'HBP Stage1',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'HBP Stage2',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
-				label: 'Hypertension crisis',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				label: 'HP crisis',
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		],
 		[
 			{
 				label: 'Normal',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: 'Elevated',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
-				label: 'Hight BP Stage1',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				label: 'HBP Stage1',
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
-				label: 'Hight BP Stage2',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				label: 'HBP Stage2',
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
-				label: 'Hypertension crisis',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				label: 'HP crisis',
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		]
 	],
@@ -159,112 +160,112 @@ let patients = [ 0, 0, 0 ],
 		[
 			{
 				label: '80',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '100',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '120',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '140',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '160',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '180',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '200',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		],
 		[
 			{
 				label: '80',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '100',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '120',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '140',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '160',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '180',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '200',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		],
 		[
 			{
 				label: '80',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '100',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '120',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '140',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '160',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '180',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			},
 			{
 				label: '200',
-				'Have Disease': 0,
-				"Haven't Disease": 0
+				'Disease Present': 0,
+				"Disease not Present": 0
 			}
 		]
 	];

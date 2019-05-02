@@ -55,7 +55,9 @@ svgDoc
 let showPictogram = () => {
 	d3.selectAll('use').attr('class', function(d) {
 		if (d < patients[currentGender]) {
-			return currentGender == 1 ? 'iconMale' : 'iconFemale';
+			if (currentGender == 0) return 'iconFemale';
+			if (currentGender == 1) return 'iconmale';
+			return 'iconGlobal';
 		} else {
 			return 'iconPlain';
 		}
@@ -65,7 +67,7 @@ let showPictogram = () => {
 let showChest = () => {
 	$('.chest-pain').html('');
 	var svg = d3.select('.chest-pain'),
-		margin = { top: 20, right: 20, bottom: 30, left: 40 },
+		margin = { top: 20, right: 60, bottom: 30, left: 40 },
 		width = +svg.attr('width') - margin.left - margin.right,
 		height = +svg.attr('height') - margin.top - margin.bottom,
 		g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -77,14 +79,14 @@ let showChest = () => {
 	var y = d3.scaleLinear().rangeRound([ height, 0 ]);
 
 	// set the colors
-	var z = d3.scaleOrdinal().range([ '#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00' ]);
+	var z = d3.scaleOrdinal().range([ '#D9B44A', '#75B1A9', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00' ]);
 
 	let data = chestPain[currentGender].map((pain) => {
-		pain.total = pain.Healthy + pain.Patients;
+		pain.total = pain['Disease Present'] + pain["Disease not Present"];
 		return pain;
 	});
 
-	var keys = [ 'Patients', 'Healthy' ];
+	var keys = [ 'Disease Present', "Disease not Present" ];
 
 	data.sort(function(a, b) {
 		return b.total - a.total;
@@ -143,19 +145,31 @@ let showChest = () => {
 			tooltip.select('text').text(d[1] - d[0]);
 		});
 
-	g.append('g').attr('class', 'axis').attr('transform', 'translate(0,' + height + ')').call(d3.axisBottom(x));
+	g
+		.append('g')
+		.attr('class', 'axis')
+		.attr('transform', 'translate(0,' + height + ')')
+		.call(d3.axisBottom(x))
+		.append('text')
+		.attr('x', width/2)
+		.attr('y', y(y.ticks().pop()) + 20)
+		.attr('dy', '0.32em')
+		.attr('fill', '#000')
+		.text('Chest Pain');
 
 	g
 		.append('g')
 		.attr('class', 'axis')
 		.call(d3.axisLeft(y).ticks(null, 's'))
 		.append('text')
-		.attr('x', 2)
-		.attr('y', y(y.ticks().pop()) + 0.5)
+		.attr('x', -180)
+		.attr('y', y(y.ticks().pop()) - 30)
 		.attr('dy', '0.32em')
 		.attr('fill', '#000')
+		.style('transform', 'rotate(-90deg)')
 		.attr('font-weight', 'bold')
-		.attr('text-anchor', 'start');
+		.attr('text-anchor', 'start')
+		.text('Percent');
 
 	var legend = g
 		.append('g')
@@ -167,15 +181,16 @@ let showChest = () => {
 		.enter()
 		.append('g')
 		.attr('transform', function(d, i) {
-			return 'translate(0,' + i * 20 + ')';
+			return 'translate(0,' + i * 40 + ')';
 		});
+ 
 
-	// legend.append('rect').attr('x', width - 19).attr('width', 19).attr('height', 19).attr('fill', z);
+	legend.append('rect').attr('x', width ).attr('width', 22).attr('height', 15).attr('fill', z);
 
-	// legend.append('text').attr('x', width - 24).attr('y', 9.5).attr('dy', '0.32em').text(function(d) {
-	// 	return d;
-	// });
-	//	});
+	legend.append('text').attr('x', width + 25 ).attr('y', 4.5).attr('dy', '0.32em')
+	.text(function(d) {
+		return d;
+	});
 
 	// Prep the tooltip bits, initial display is hidden
 	var tooltip = svg.append('g').attr('class', 'bar-tooltip').style('display', 'none');
@@ -192,18 +207,19 @@ let showChest = () => {
 };
 
 let showBPS = () => {
-	$('.bps-chart').html('');
+	let selectors = [ '.bps-chart.young', '.bps-chart.middle', '.bps-chart.elderly' ];
+	$(selectors[currentAgeRange]).html('');
 	const data = bpsData[currentAgeRange];
 
 	const keys = Object.keys(data[0]).slice(1);
 
 	//	const tip = d3.tip().html((d) => d.value);
-	const svg = d3.select('.bps-chart');
+	const svg = d3.select(selectors[currentAgeRange]);
 	const margin = {
 			top: 20,
 			right: 20,
 			bottom: 30,
-			left: 30
+			left: 40
 		},
 		width = svg.attr('width'),
 		height = svg.attr('height'),
@@ -220,7 +236,7 @@ let showBPS = () => {
 
 	const y = d3.scaleLinear().rangeRound([ innerHeight, 0 ]);
 
-	const z = d3.scaleOrdinal().range([ '#AA8139', '#AA9439', '#3C3176', '#2C4770', '#96A537', '#68266F', '#492E74' ]);
+	const z = d3.scaleOrdinal().range([ '#D9B44A', '#75B1A9', '#3C3176', '#2C4770', '#96A537', '#68266F', '#492E74' ]);
 
 	x0.domain(data.map((d) => d.label));
 	x1.domain(keys).rangeRound([ 0, x0.bandwidth() ]);
@@ -246,6 +262,19 @@ let showBPS = () => {
 		.attr('width', x1.bandwidth())
 		.attr('height', (d) => innerHeight - y(d.value))
 		.attr('fill', (d) => z(d.key));
+	// .on('mouseover', function() {
+	// 	tooltip.style('display', null);
+	// })
+	// .on('mouseout', function() {
+	// 	tooltip.style('display', 'none');
+	// })
+	// .on('mousemove', function(d) {
+	// 	console.log(d);
+	// 	var xPosition = d3.mouse(this)[0] - 5;
+	// 	var yPosition = d3.mouse(this)[1] - 5;
+	// 	tooltip.attr('transform', 'translate(' + xPosition + ',' + yPosition + ')');
+	// 	tooltip.select('text').text(d.value);
+	// });
 	//	.on('mouseover', tip.show)
 	//	.on('mouseout', tip.hide);
 
@@ -253,23 +282,29 @@ let showBPS = () => {
 		.append('g')
 		.attr('class', 'axis-bottom')
 		.attr('transform', 'translate(0,' + innerHeight + ')')
-		.call(d3.axisBottom(x0));
+		.call(d3.axisBottom(x0))
+		.append('text')
+		.attr('x', width/2)
+		.attr('y', y(y.ticks().pop()) + 25)
+		.attr('dy', '0.32em')
+		.attr('fill', '#000')
+		.text('Blood Pressure');
 
 	g
 		.append('g')
 		.attr('class', 'axis-left')
 		.call(d3.axisLeft(y).ticks(null, 's'))
 		.append('text')
-		.attr('x', 10)
-		.attr('y', y(y.ticks().pop()) + 10)
+		.attr('x', -50)
+		.attr('y', y(y.ticks().pop()) - 30)
 		.attr('dy', '0.32em')
 		.attr('fill', '#000')
 		.style('transform', 'rotate(-90deg)')
 		.attr('font-weight', 'bold')
 		.attr('text-anchor', 'end')
-		.text('Population');
+		.text('Count of People');
 
-	const legend = g
+	/*const legend = g
 		.append('g')
 		.attr('font-family', 'sans-serif')
 		.attr('font-size', 10)
@@ -283,12 +318,25 @@ let showBPS = () => {
 	legend.append('rect').attr('x', innerWidth - 19).attr('width', 10).attr('height', 10).attr('fill', z);
 
 	legend.append('text').attr('x', innerWidth - 32).attr('y', 6).attr('dy', '0.32em').text((d) => d);
+*/
+	var tooltip = svg.append('g').attr('class', 'bar-tooltip').style('display', 'none');
+
+	tooltip.append('rect').attr('width', 60).attr('height', 20).attr('fill', 'white').style('opacity', 0.5);
+
+	tooltip
+		.append('text')
+		.attr('x', 30)
+		.attr('dy', '1.2em')
+		.style('text-anchor', 'middle')
+		.attr('font-size', '12px')
+		.attr('font-weight', 'bold');
 };
 
 let showHR = () => {
-	$('.hr-chart').html('');
-	var svg = d3.select('.hr-chart'),
-		margin = { top: 20, right: 20, bottom: 30, left: 40 },
+	let selectors = [ '.hr-chart.young', '.hr-chart.middle', '.hr-chart.elderly' ];
+	$(selectors[currentAgeRange]).html('');
+	var svg = d3.select(selectors[currentAgeRange]),
+		margin = { top: 20, right: 20, bottom: 40, left: 40 },
 		width = +svg.attr('width') - margin.left - margin.right,
 		height = +svg.attr('height') - margin.top - margin.bottom,
 		g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -300,14 +348,14 @@ let showHR = () => {
 	var y = d3.scaleLinear().rangeRound([ height, 0 ]);
 
 	// set the colors
-	var z = d3.scaleOrdinal().range([ '#ff0000', '#0000ff', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00' ]);
+	var z = d3.scaleOrdinal().range([ '#D9B44A', '#75B1A9', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00' ]);
 
 	let data = hrData[currentAgeRange].map((pain) => {
-		pain.total = pain['Have Disease'] + pain["Haven't Disease"];
+		pain.total = pain['Disease Present'] + pain["Disease not Present"];
 		return pain;
 	});
 
-	var keys = [ 'Have Disease', "Haven't Disease" ];
+	var keys = [ 'Disease Present', "Disease not Present" ];
 
 	x.domain(
 		data.map(function(d) {
@@ -340,7 +388,7 @@ let showHR = () => {
 		.enter()
 		.append('rect')
 		.attr('x', function(d) {
-			return x(d.data.label) + 10;
+			return x(d.data.label);
 		})
 		.attr('y', function(d) {
 			return y(d[1]);
@@ -348,7 +396,7 @@ let showHR = () => {
 		.attr('height', function(d) {
 			return y(d[0]) - y(d[1]);
 		})
-		.attr('width', x.bandwidth() - 20)
+		.attr('width', x.bandwidth() + 3)
 		.on('mouseover', function() {
 			tooltip.style('display', null);
 		})
@@ -363,21 +411,33 @@ let showHR = () => {
 			tooltip.select('text').text(d[1] - d[0]);
 		});
 
-	g.append('g').attr('class', 'axis').attr('transform', 'translate(0,' + height + ')').call(d3.axisBottom(x));
+	g
+		.append('g')
+		.attr('class', 'axis')
+		.attr('transform', 'translate(0,' + height + ')')
+		.call(d3.axisBottom(x))
+		.append('text')
+		.attr('x', width / 2)
+		.attr('y', y(y.ticks().pop()) +25)
+		.attr('dy', '0.32em')
+		.attr('fill', '#000')
+		.text('Heart Rate');
 
 	g
 		.append('g')
 		.attr('class', 'axis')
 		.call(d3.axisLeft(y).ticks(null, 's'))
 		.append('text')
-		.attr('x', 2)
-		.attr('y', y(y.ticks().pop()) + 0.5)
+		.attr('x', -150)
+		.attr('y', y(y.ticks().pop()) - 30)
 		.attr('dy', '0.32em')
 		.attr('fill', '#000')
+		.style('transform', 'rotate(-90deg)')
 		.attr('font-weight', 'bold')
-		.attr('text-anchor', 'start');
+		.attr('text-anchor', 'start')
+		.text('Count of People');
 
-	var legend = g
+/*	var legend = g
 		.append('g')
 		.attr('font-family', 'sans-serif')
 		.attr('font-size', 10)
@@ -395,7 +455,7 @@ let showHR = () => {
 	legend.append('text').attr('x', width - 24).attr('y', 9.5).attr('dy', '0.32em').text(function(d) {
 		return d;
 	});
-	//	});
+	//	});*/
 
 	// Prep the tooltip bits, initial display is hidden
 	var tooltip = svg.append('g').attr('class', 'bar-tooltip').style('display', 'none');
@@ -411,7 +471,7 @@ let showHR = () => {
 		.attr('font-weight', 'bold');
 };
 let loadData = () => {
-	d3.csv('https://raw.githubusercontent.com/shristibhat/Data-Vis/master/heart.csv').then(function(data) {
+	d3.csv(csv_file).then(function(data) {
 		for (patient of data) {
 			let bpsCategory = 0;
 
@@ -425,24 +485,24 @@ let loadData = () => {
 			if (patient.target == 1) {
 				patients[patient.sex]++;
 				patients[2]++;
-				chestPain[patient.sex][patient.cp].Patients++;
-				chestPain[2][parseInt(patient.cp) > 0 ? parseInt(patient.cp) - 1 : 0].Patients++;
+				chestPain[patient.sex][patient.cp]['Disease Present']++;
+				chestPain[2][parseInt(patient.cp) > 0 ? parseInt(patient.cp) - 1 : 0]['Disease Present']++;
 
-				bpsData[ageRange][bpsCategory]['Have Disease']++;
-				hrData[ageRange][hrCategory]['Have Disease']++;
+				bpsData[ageRange][bpsCategory]['Disease Present']++;
+				hrData[ageRange][hrCategory]['Disease Present']++;
 			} else {
-				chestPain[patient.sex][patient.cp].Healthy++;
-				chestPain[2][patient.cp].Healthy++;
-				bpsData[ageRange][bpsCategory]["Haven't Disease"]++;
-				hrData[ageRange][hrCategory]["Haven't Disease"]++;
+				chestPain[patient.sex][patient.cp]["Disease not Present"]++;
+				chestPain[2][patient.cp]["Disease not Present"]++;
+				bpsData[ageRange][bpsCategory]["Disease not Present"]++;
+				hrData[ageRange][hrCategory]["Disease not Present"]++;
 			}
 			population[patient.sex]++;
 		}
 		chestPain = chestPain.map((gender) => {
 			return gender.map((pain) => {
-				let sum = pain.Patients + pain.Healthy;
-				pain.Patients = Math.round(pain.Patients / sum * 100);
-				pain.Healthy = Math.round(pain.Healthy / sum * 100);
+				let sum = pain['Disease Present'] + pain[[ "Disease not Present" ]];
+				pain['Disease Present'] = Math.round(pain['Disease Present'] / sum * 100);
+				pain[[ "Disease not Present" ]] = Math.round(pain[[ "Disease not Present" ]] / sum * 100);
 				return pain;
 			});
 		});
@@ -450,15 +510,27 @@ let loadData = () => {
 		patients[1] = parseInt(patients[1] / population[1] * 100);
 		patients[2] = parseInt(patients[2] / data.length * 100);
 
-		minAge = data.reduce((min, patient) => (parseInt(patient.age) < min ? parseInt(patient.age) : min, 200));
-
 		showPictogram();
 		showChest();
-		showBPS();
-		showHR();
+		loadBP();
+		loadHR();
 	});
 };
+let loadBP = () => {
+	for (let i = 0; i < 3; i++) {
+		currentAgeRange = i;
+		showBPS();
+	}
+};
+let loadHR = () => {
+	for (let i = 0; i < 3; i++) {
+		currentAgeRange = i;
+		showHR();
+	}
+};
+
 loadData();
+
 $('#maleButton').click(() => {
 	currentGender = 1;
 	showPictogram();
@@ -469,9 +541,27 @@ $('#femaleButton').click(() => {
 	showPictogram();
 	showChest();
 });
+$('#overallButton').click(() => {
+	currentGender = 2;
+	showPictogram();
+	showChest();
+});
 
-$('#ageSlider').slider().on('slideStop', (ev) => {
-	currentAgeRange = $('#ageSlider').data('slider').getValue() - 1;
+$('#ageYoung').click((e) => {
+	currentAgeRange = 0;
 	showBPS();
 	showHR();
+	$('#ageButton').html('Young');
+});
+$('#ageMiddle').click((e) => {
+	currentAgeRange = 1;
+	showBPS();
+	showHR();
+	$('#ageButton').html('Middle');
+});
+$('#ageElder').click((e) => {
+	currentAgeRange = 2;
+	showBPS();
+	showHR();
+	$('#ageButton').html('Elder');
 });
