@@ -1,0 +1,59 @@
+<html>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <!--this doesn't seem to help-->
+  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="style.css">
+  <body>
+    <div class="container">
+      <h1 class="text-center">PREVALENCE OF HEART DISEASE IN PATIENTS</h1>
+      <div class="row">
+        <div class="mx-auto">
+           <a id="maleButton" class="btn btn-primary">
+              <span><i class="fa fa-mars"></i></span>
+              Male</a>
+            <a id="femaleButton" class="btn btn-danger "><span><i class="fa fa-venus"></i></span>&nbsp;Female</a>
+        </div>
+       
+      </div>
+      <div class="row">
+        <div class="pictogram mx-auto">
+        </div>
+      </div>
+      <div class="row mx-auto col-6">
+        <svg class="chest-pain mx-auto" width="400" height="400">
+        </svg>
+      </div>
+      <h1 class="text-center">RISK FACTORS FOR VARIOUS AGE RANGES:</h1>
+      <div class="row">
+        <div class="mx-auto">
+          <input id="ageSlider" class="col-6" type="text" data-provide="slider" data-slider-ticks="[1, 2, 3]"
+          data-slider-ticks-labels='["Young", "Middle", "Elder"]' data-slider-min="1" data-slider-max="3" data-slider-step="1"
+          data-slider-value="1" data-slider-tooltip="hide" />
+        </div>
+      </div>
+      <div class="row mx-auto">
+        <svg class="bps-chart" width="500" height="400"></svg>
+        <svg class="hr-chart" width="500" height="400"></svg>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.7.0/d3-legend.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.js"></script>
+  <script src="variables.js"> </script>
+  <script src="js.js"> </script>
+  <script>
+  // With JQuery
+ 
+  </script>
+</html>
