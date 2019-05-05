@@ -114,12 +114,12 @@ let csv_file = 'https://raw.githubusercontent.com/shristibhat/Data-Vis/master/he
 					'Not Present': 0
 				},
 				{
-					label: 'HBP Stage1',
+					label: 'HBP 1',
 					'Disease Present': 0,
 					'Not Present': 0
 				},
 				{
-					label: 'HBP Stage2',
+					label: 'HBP 2',
 					'Disease Present': 0,
 					'Not Present': 0
 				},
@@ -141,12 +141,12 @@ let csv_file = 'https://raw.githubusercontent.com/shristibhat/Data-Vis/master/he
 					'Not Present': 0
 				},
 				{
-					label: 'HBP Stage1',
+					label: 'HBP 1',
 					'Disease Present': 0,
 					'Not Present': 0
 				},
 				{
-					label: 'HBP Stage2',
+					label: 'HBP 2',
 					'Disease Present': 0,
 					'Not Present': 0
 				},
