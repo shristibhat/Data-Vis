@@ -2,8 +2,9 @@
   overflow:none;
   padding:10px;
   float:left;
-  width:400px;
-  height:400px;
+  width:350px;
+  height:350px;
+
 }
 
 
@@ -34,35 +35,7 @@
   width: 40%;
 }
 
-.button1 {
-  background-color:#08519c; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  margin: 4px 15px;
-  cursor: pointer;
-}
-
-
-
-.button2 {
-  background-color:#c51b8a; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  margin: 6px 15px;
-  cursor: pointer;
-}
-
-.button3 {
+#overallButton {
   background-color:#FFA07A; /* Green */
   border: none;
   color: white;
@@ -75,18 +48,48 @@
   cursor: pointer;
 }
 
-.button1:hover {
-  background-color: #3e7cb9;
-  color:white;
+
+
+#maleButton {
+  background-color:#08519c; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 6px 15px;
+  cursor: pointer;
 }
-.button2:hover {
-  background-color:#f768a1;
-  color:white;
+
+#femaleButton {
+  background-color:#c51b8a; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 15px;
+  cursor: pointer;
 }
-.button3:hover {
+
+#overallButton:hover {
   background-color: rgb(233, 175, 152);
   color:white;
 }
+
+#maleButton:hover {
+  background-color: #3e7cb9;
+  color:white;
+}
+#femaleButton:hover {
+  background-color:#f768a1;
+  color:white;
+}
+
 
 
 rect    {
