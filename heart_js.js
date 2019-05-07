@@ -1,3 +1,17 @@
+/*
+-----------------REFERENCES----------------------
+http://bl.ocks.org/alansmithy/d832fc03f6e6a91e99f4
+https://bl.ocks.org/LauraCortes/bd506812787c423e4560e72102a7ce94
+http://bl.ocks.org/tmaybe/6144082
+http://bl.ocks.org/nnattawat/8916402
+https://bl.ocks.org/d3noob/96b74d0bd6d11427dd797892551a103c
+https://observablehq.com/@d3/grouped-bar-chart
+https://cmsdk.com/javascript/updating-graph-in-d3.html
+http://qaru.site/questions/170369/d3selectelement-not-working-when-code-above-the-html-element
+https://www.datamake.io/blog/d3-zoom
+
+*/
+
 //create svg element
 var svgDoc = d3.select('.pictogram').append('svg').attr('viewBox', '0 0 100 100');
 
